@@ -5,6 +5,7 @@ let response;
 let currentPage;
 
 async function sendGetRequest(url) {
+    $("#container").html("<div class='loader'></div>");
     try {
         response = await fetch(url);
         users = await response.json();
@@ -22,7 +23,8 @@ function renderUsers() {
         $("#container").empty();
         for (let i = 0; i < users.data.length; ++i) {
             let user = users.data[i];
-            let userContainer = $("<div></div>").addClass("user-container");
+            let userContainer = $("<div></div>").addClass("user-container")
+                .attr("id", user.id.toString());
 
             let avatar = $("<img>").attr({
                 "src": user.avatar,
